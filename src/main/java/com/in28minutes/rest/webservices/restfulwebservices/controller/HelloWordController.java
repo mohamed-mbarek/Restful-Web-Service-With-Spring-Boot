@@ -3,8 +3,10 @@ package com.in28minutes.rest.webservices.restfulwebservices.controller;
 import com.in28minutes.rest.webservices.restfulwebservices.entities.User;
 import com.in28minutes.rest.webservices.restfulwebservices.exception.UserNotFoundException;
 import com.in28minutes.rest.webservices.restfulwebservices.searvices.UserDaoServices;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -31,7 +33,7 @@ public class HelloWordController {
     }
 
     @PostMapping("/users")
-    public ResponseEntity<User> retrieveUser(@RequestBody User user){
+    public ResponseEntity<User> retrieveUser(@Valid @RequestBody User user){
         User savedUser = userDaoServices.save(user);
         URI location = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
